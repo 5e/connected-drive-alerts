@@ -1,5 +1,5 @@
 ## connected-drive-alerts
-Do you forget to close your windows in your car like me? This tool sends alerts to a Discord server if you have left your windows open!
+Do you forget to close your windows in your car like me? This tool sends alerts to a Discord server to remind you to turn back and close them!
 
 Uses the [bimmer_connected](https://github.com/bimmerconnected/bimmer_connected) library to query ConnectedDrive
 
