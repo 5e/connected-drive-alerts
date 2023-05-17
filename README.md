@@ -12,6 +12,7 @@ Current features:
 Future features:
 - Log locations of where you car has stopped
 - Alert if your car has been started
+- Support for multiple cars
 
 ## Config
 
