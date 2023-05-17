@@ -39,9 +39,6 @@ async def update_vehicles():
     try:
         await get_vehicles()
         vehicle = account.vehicles[0] #currently only supports tracking of 1 car
-        if vehicle.is_vehicle_active == True: #don't alert if car is being driven
-            alert_sent = False #reset alert
-            return
         
         if last_lock != vehicle.doors_and_windows.door_lock_state:
             if last_lock != None:
@@ -51,6 +48,10 @@ async def update_vehicles():
                 embed.set_footer(text="connected-drive-alerts", icon_url="https://cdn-icons-png.flaticon.com/512/25/25231.png")
                 message = await channel.send(embed=embed)
             last_lock = vehicle.doors_and_windows.door_lock_state
+
+        if vehicle.is_vehicle_active == True: #don't alert if car is being driven
+            alert_sent = False #reset alert
+            return
 
         if alert_sent == True:
             return
