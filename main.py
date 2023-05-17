@@ -20,6 +20,7 @@ account = MyBMWAccount(config['email'], config['password'], Regions.REST_OF_WORL
 geoapify = Geoapify(config['geoapify_api_key'])
 
 alert_sent = False
+last_lock = None
 
 @client.event
 async def on_ready():
@@ -31,9 +32,10 @@ async def on_ready():
 async def get_vehicles():
     await account.get_vehicles()
 
-@tasks.loop(seconds=60)
+@tasks.loop(seconds=20)
 async def update_vehicles():
     global alert_sent
+    global last_lock
     try:
         await get_vehicles()
         vehicle = account.vehicles[0] #currently only supports tracking of 1 car
@@ -41,6 +43,15 @@ async def update_vehicles():
             alert_sent = False #reset alert
             return
         
+        if last_lock != vehicle.doors_and_windows.door_lock_state:
+            if last_lock != None:
+                embed=discord.Embed(title=f"{vehicle.brand.upper()} {vehicle.name}", description=f"Car lock from {last_lock} to {vehicle.doors_and_windows.door_lock_state}", color=0xff0000)
+                embed.set_image(url=geoapify.get_static_map_url(vehicle))
+                embed.add_field(name="Status", value=f"[Location]({utils.create_google_maps_link(vehicle)})", inline=False)
+                embed.set_footer(text="connected-drive-alerts", icon_url="https://cdn-icons-png.flaticon.com/512/25/25231.png")
+                message = await channel.send(embed=embed)
+            last_lock = vehicle.doors_and_windows.door_lock_state
+
         if alert_sent == True:
             return
         
