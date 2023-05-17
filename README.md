@@ -3,12 +3,15 @@ Do you forget to close your windows in your car like me? This tool sends alerts 
 
 Uses the [bimmer_connected](https://github.com/bimmerconnected/bimmer_connected) library to query ConnectedDrive
 
-Currently working on:
-- Alert if windows have been left open (if after 1 minute of locking the car the windows are open, send alert)
+<img src="https://i.imgur.com/YfYem0p.jpg" width="500"/>
+
+Current features:
+- Alert if windows/doors have been left open
+- Alerts when car has been locked/unlocked
 
 Future features:
 - Log locations of where you car has stopped
-- Alert if your car has been unlocked/started
+- Alert if your car has been started
 
 ## Config
 
