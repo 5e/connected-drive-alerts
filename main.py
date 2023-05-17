@@ -59,10 +59,10 @@ async def update_vehicles():
         total_output = ""
         lid: Lid
         for lid in vehicle.doors_and_windows.open_lids:
-            total_output += f"{lid.name}, "
+            total_output += f"{lid.name} door, "
         window: Window
         for window in vehicle.doors_and_windows.open_windows:
-            total_output += f"{window.name}, "
+            total_output += f"{window.name} window, "
 
         if total_output != "":
             embed=discord.Embed(title=f"{vehicle.brand.upper()} {vehicle.name}", description=f"Windows/door open: {total_output[:-2]}", color=0xff0000)
