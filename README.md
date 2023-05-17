@@ -9,3 +9,13 @@ Currently working on:
 Future features:
 - Log locations of where you car has stopped
 - Alert if your car has been unlocked/started
+
+## Config
+
+|Field| Description |
+|--|--|
+| email | required, BMW Connected Drive email |
+| password | required, BMW Connected Drive password |
+| discord_token | required, discord bot token |
+| channel_id | required, channel to post alerts in |
+| geoapify_api_key | optional, use "" if don't want location thumbnails |
