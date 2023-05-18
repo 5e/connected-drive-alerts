@@ -21,6 +21,7 @@ geoapify = Geoapify(config['geoapify_api_key'])
 
 alert_sent = False
 last_lock = None
+last_timestamp = None
 
 @client.event
 async def on_ready():
@@ -36,6 +37,7 @@ async def get_vehicles():
 async def update_vehicles():
     global alert_sent
     global last_lock
+    global last_timestamp
     try:
         await get_vehicles()
         vehicle = account.vehicles[0] #currently only supports tracking of 1 car
@@ -49,8 +51,9 @@ async def update_vehicles():
                 message = await channel.send(embed=embed)
             last_lock = vehicle.doors_and_windows.door_lock_state
 
-        if vehicle.is_vehicle_active == True: #don't alert if car is being driven
-            alert_sent = False #reset alert
+        if last_timestamp != vehicle.timestamp: #experimental, if data has updated then car is currently being driven?
+            alert_sent = False
+            last_timestamp = vehicle.timestamp
             return
 
         if alert_sent == True:
