@@ -51,10 +51,14 @@ async def update_vehicles():
                 message = await channel.send(embed=embed)
             last_lock = vehicle.doors_and_windows.door_lock_state
 
-        if last_timestamp != vehicle.timestamp: #experimental, if data has updated then car is currently being driven?
-            alert_sent = False
-            last_timestamp = vehicle.timestamp
-            return
+        if last_timestamp != vehicle.data['state']['lastUpdatedAt']:
+            #experimental, if data has updated then car is currently being driven?
+            if last_timestamp == None:
+                last_timestamp = vehicle.data['state']['lastUpdatedAt']
+            else:
+                alert_sent = False
+                last_timestamp = vehicle.data['state']['lastUpdatedAt']
+                return
 
         if alert_sent == True:
             return
