@@ -3,7 +3,10 @@ Do you forget to close your windows in your car like me? This tool sends alerts 
 
 Uses the [bimmer_connected](https://github.com/bimmerconnected/bimmer_connected) library to query ConnectedDrive
 
+<p float="left">
 <img src="https://i.imgur.com/YfYem0p.jpg" width="500"/>
+<img src="https://i.imgur.com/3dqwj4u.jpeg" width="500"/>
+</p>
 
 Current features:
 - Alert if windows/doors have been left open
