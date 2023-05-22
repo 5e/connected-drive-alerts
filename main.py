@@ -22,7 +22,8 @@ geoapify = Geoapify(config['geoapify_api_key'])
 alert_sent = False
 last_lock = None
 last_timestamp = None
-
+counter = 0
+from datetime import datetime
 @client.event
 async def on_ready():
     global channel
@@ -39,8 +40,14 @@ async def update_vehicles():
     global alert_sent
     global last_lock
     global last_timestamp
+    global counter
     try:
         await get_vehicles()
+        counter += 1
+        
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
+        print("Current Time =", current_time)
         vehicle = account.vehicles[0] #currently only supports tracking of 1 car
         if last_lock != vehicle.doors_and_windows.door_lock_state:
             if last_lock != None:
@@ -80,6 +87,25 @@ async def update_vehicles():
             alert_sent = True
 
     except Exception as e:
-        print(e)
+        import jsonpickle
+        import random
+        import traceback
+        message = await channel.send(str(e) + str(counter))
+        message = await channel.send(traceback.format_exc())
+        print(traceback.format_exc())
+        randomnumber = random.randint(0,100000)
+        jsonstr = jsonpickle.encode(account.vehicles[0])
 
+        f = open(f"demofile{randomnumber}.txt", "w")
+        f.write(jsonstr)
+        f.close()
+        
+        print(str(e) + str(counter))
+
+
+
+
+
+
+# asyncio.run(main())
 client.run(config['discord_token'])
