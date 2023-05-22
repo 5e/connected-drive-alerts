@@ -28,7 +28,8 @@ async def on_ready():
     global channel
     print(f'We have logged in as {client.user}')
     channel = client.get_channel(config['channel_id'])
-    await update_vehicles.start()
+    if not update_vehicles.is_running():
+        update_vehicles.start() 
 
 async def get_vehicles():
     await account.get_vehicles()
@@ -41,7 +42,6 @@ async def update_vehicles():
     try:
         await get_vehicles()
         vehicle = account.vehicles[0] #currently only supports tracking of 1 car
-        
         if last_lock != vehicle.doors_and_windows.door_lock_state:
             if last_lock != None:
                 embed=discord.Embed(title=f"{vehicle.brand.upper()} {vehicle.name}", description=f"Car lock from {last_lock} to {vehicle.doors_and_windows.door_lock_state}", color=0xff0000)
@@ -52,7 +52,7 @@ async def update_vehicles():
             last_lock = vehicle.doors_and_windows.door_lock_state
 
         if last_timestamp != vehicle.data['state']['lastUpdatedAt']:
-            #experimental, if data has updated then car is currently being driven?
+            #experimental, if data has updated then car is being driven or has been locked/unlocked
             if last_timestamp == None:
                 last_timestamp = vehicle.data['state']['lastUpdatedAt']
             else:
@@ -80,13 +80,6 @@ async def update_vehicles():
             alert_sent = True
 
     except Exception as e:
-        message = await channel.send(e)
         print(e)
 
-
-
-
-
-
-# asyncio.run(main())
 client.run(config['discord_token'])
