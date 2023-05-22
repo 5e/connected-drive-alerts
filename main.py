@@ -1,4 +1,4 @@
-import asyncio
+#connected-drive-alerts v1.2
 from bimmer_connected.account import MyBMWAccount
 from bimmer_connected.vehicle.doors_windows import Window, Lid
 from bimmer_connected.api.regions import Regions
