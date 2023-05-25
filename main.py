@@ -34,7 +34,7 @@ async def on_ready():
 async def get_vehicles():
     await account.get_vehicles()
 
-@tasks.loop(seconds=40)
+@tasks.loop(seconds=43)
 async def update_vehicles():
     global alert_sent
     global last_lock
