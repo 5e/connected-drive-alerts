@@ -1,2 +1,2 @@
 bimmer_connected==0.13.8
-discord.py==2.0.1
+Requests==2.31.0
