@@ -23,6 +23,5 @@ Future features:
 |--|--|
 | email | required, BMW Connected Drive email |
 | password | required, BMW Connected Drive password |
-| discord_token | required, discord bot token |
-| channel_id | required, channel to post alerts in |
+| webhook_url | required, webhook url to post updates |
 | geoapify_api_key | optional, use "" if don't want location thumbnails |
