@@ -1,7 +1,6 @@
 {
     "email": "john@example.com",
     "password": "Test123",
-    "discord_token": "TOKEN",
-    "channel_id": 4836034546540418050,
+    "webhook_url": "https://discord.com/api/webhooks/asdasd",
     "geoapify_api_key": ""
 }
