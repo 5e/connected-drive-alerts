@@ -11,10 +11,11 @@ Uses the [bimmer_connected](https://github.com/bimmerconnected/bimmer_connected)
 Current features:
 - Alert if windows/doors have been left open
 - Alerts when car has been locked/unlocked
+- Location where above events happened
 
 Future features:
-- Log locations of where you car has stopped
-- Alert if your car has been started
+- ~~Live location of vehicle~~ Not possible, location data not updated in-motion
+- ~~Alert if your car has been started~~ Not possible
 - Support for multiple cars
 
 ## Config
@@ -23,6 +24,5 @@ Future features:
 |--|--|
 | email | required, BMW Connected Drive email |
 | password | required, BMW Connected Drive password |
-| discord_token | required, discord bot token |
-| channel_id | required, channel to post alerts in |
+| webhook_url | required, webhook url to post updates |
 | geoapify_api_key | optional, use "" if don't want location thumbnails |
