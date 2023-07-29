@@ -69,7 +69,7 @@ async def update_vehicles():
             alert_sent = True
 
     except Exception as e:
-        webhook.send_webhook_error(e)
+        webhook.send_webhook_error(str(e))
         print(e)
 
 
